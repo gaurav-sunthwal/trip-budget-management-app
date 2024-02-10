@@ -4,7 +4,7 @@ import { IoSettings } from "react-icons/io5";
 import { IoIosLogOut } from "react-icons/io";
 import { CgNotes } from "react-icons/cg";
 import { TfiHelpAlt } from "react-icons/tfi";
-import { CiWallet } from "react-icons/ci";
+import { BsWallet2 } from "react-icons/bs";
 function Sidebar({ userName, budget }) {
   return (
     <VStack h={"100vh"} bg={"#373737"} justifyContent={"center"}>
@@ -24,7 +24,7 @@ function Sidebar({ userName, budget }) {
         <Box mt={"40px"} mb={"40px"}>
           <Menu iconName={<FaHome />} title={"Dashboard"} />
           <Menu iconName={<CgNotes />} title={"Transaction"} />
-          <Menu iconName={<CiWallet />} title={"Wallet"} />
+          <Menu iconName={<BsWallet2 />} title={"Wallet"} />
           <Menu iconName={<IoSettings />} title={"Settings"} />
         </Box>
         <Box mt={"40px"} mb={"40px"}>
