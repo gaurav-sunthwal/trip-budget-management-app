@@ -12,12 +12,13 @@ import { BsCreditCard2Front } from "react-icons/bs";
 import { GiReceiveMoney, GiPayMoney } from "react-icons/gi";
 import TransactionCard from "./TransactionCard";
 import BasicUsage from "./BasicUsage";
+import { FaShoppingCart } from "react-icons/fa";
 function Budget() {
   const [amount, setAmount] = useState(100);
   const [income, setIncome] = useState(100);
   const [spending, setSpending] = useState(100);
   return (
-    <VStack justifyContent={"center"} w={"100%"}>
+    <VStack justifyContent={"center"}>
       <HStack w={"100%"}>
         <Box p={2}>
           <Box m={3}>
@@ -55,7 +56,7 @@ function Budget() {
                 <BasicUsage
                   mainBody={
                     <>
-                      <Input type="namec" placeholder="Name" />
+                      <Input autoFocus type="namec" placeholder="Name" />
                     </>
                   }
                   btnName={"Add Friends"}
@@ -80,10 +81,55 @@ function Budget() {
                 btnName={"Add Transaction"}
               />
             }
+            cardThings={
+              <>
+                <AllTransaction titleofSpending={"Shopping"} prices={"$30"} />
+                <AllTransaction titleofSpending={"Shopping"} prices={"$30"} />
+                <AllTransaction titleofSpending={"Shopping"} prices={"$30"} />
+                <AllTransaction titleofSpending={"Shopping"} prices={"$30"} />
+                <AllTransaction titleofSpending={"Shopping"} prices={"$30"} />
+                <AllTransaction titleofSpending={"Shopping"} prices={"$30"} />
+                <AllTransaction titleofSpending={"Shopping"} prices={"$30"} />
+                <AllTransaction titleofSpending={"Shopping"} prices={"$30"} />
+                <AllTransaction titleofSpending={"Shopping"} prices={"$30"} />
+                <AllTransaction titleofSpending={"Shopping"} prices={"$30"} />
+                <AllTransaction titleofSpending={"Shopping"} prices={"$30"} />
+                <AllTransaction titleofSpending={"Shopping"} prices={"$30"} />
+              </>
+            }
           />
         </Box>
       </HStack>
     </VStack>
+  );
+}
+
+function AllTransaction({ titleofSpending, prices }) {
+  return (
+    <>
+      <Box w={"100%"} color={"white"}>
+        <HStack justifyContent={"space-between"} p={2}>
+          <Box
+            fontSize={"28px"}
+            bg={"#383838"}
+            p={3}
+            borderTopLeftRadius={15}
+            borderBottomLeftRadius={15}
+          >
+            <FaShoppingCart />
+          </Box>
+          <Box>
+            <Heading size={"md"}>{titleofSpending}</Heading>
+            <HStack>
+              <p>Yesterday, 2:00 PM</p>
+            </HStack>
+          </Box>
+          <Box>
+            <Heading size={"md"}>{prices}</Heading>
+          </Box>
+        </HStack>
+      </Box>
+    </>
   );
 }
 

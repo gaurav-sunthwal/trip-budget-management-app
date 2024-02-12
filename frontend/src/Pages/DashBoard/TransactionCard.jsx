@@ -22,54 +22,43 @@ import {
   PopoverHeader,
   PopoverTrigger,
   Stack,
+  VStack,
   useDisclosure,
 } from "@chakra-ui/react";
 import { BsThreeDots } from "react-icons/bs";
-function TransactionCard({ cardName, cardHight, manuBtn }) {
+function TransactionCard({ cardName, cardHight, manuBtn, cardThings }) {
   return (
-    <div>
+    <Box>
       <Card
         h={cardHight}
+        // w={"100%"}
         p={5}
         m={3}
         color={"#D1D1D1"}
         bg={"#282828"}
         borderRadius={"20px"}
+        overflow={"auto"}
       >
-        <HStack justifyContent={"space-between"}>
+        <HStack
+          zIndex={3}
+          justifyContent={"space-between"}
+          //   w={"30%"}
+          h={"39px"}
+          //   position={"fixed"}
+          //   p={2}
+          bg={"#282828"}
+          style={{
+            filter: blur("534534px"),
+          }}
+        >
           <Heading size={"md"}>{cardName}</Heading>
           {manuBtn}
         </HStack>
+        <VStack mt={5} p={2}>
+          {cardThings}
+        </VStack>
       </Card>
-    </div>
-  );
-}
-
-function BasicUsage({ button, mainBody, btnName, title, handalClick }) {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  return (
-    <>
-      <Box cursor={"pointer"} onClick={onOpen}>
-        <BsThreeDots />
-      </Box>
-      <Modal isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>{title}</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>{mainBody}</ModalBody>
-
-          <ModalFooter>
-            <Button colorScheme="blue" mr={3} onClick={onClose}>
-              Close
-            </Button>
-            <Button variant="ghost" onClick={handalClick}>
-              {btnName}
-            </Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
-    </>
+    </Box>
   );
 }
 
