@@ -1,41 +1,54 @@
-import { Box, HStack, Heading, VStack } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Drawer,
+  DrawerBody,
+  DrawerContent,
+  HStack,
+  Heading,
+  VStack,
+  useDisclosure,
+} from "@chakra-ui/react";
 import { FaHome, FaUserAlt } from "react-icons/fa";
 import { IoSettings } from "react-icons/io5";
 import { IoIosLogOut } from "react-icons/io";
 import { CgNotes } from "react-icons/cg";
 import { TfiHelpAlt } from "react-icons/tfi";
 import { BsWallet2 } from "react-icons/bs";
+import React from "react";
 function Sidebar({ userName, budget }) {
   return (
-    <VStack h={"100vh"} bg={"#373737"} justifyContent={"center"}>
-      <Box>
-        <Box p={3} textAlign={"start"} color={"white"} mb={"30px"}>
-          <Heading size={"lg"} color={"gray"}>
-            Welcome back,
-          </Heading>
-          <Heading>{userName} !</Heading>
+    <>
+      <VStack h={"100vh"} bg={"#373737"} justifyContent={"center"} w={"100%"}>
+        <Box>
+          <Box p={3} textAlign={"start"} color={"white"} mb={"30px"}>
+            <Heading size={"lg"} color={"gray"}>
+              Welcome back,
+            </Heading>
+            <Heading>{userName} !</Heading>
+          </Box>
+          <Box p={3} textAlign={"start"}>
+            <Heading color={"orange"}>{budget}</Heading>
+            <Heading size={"sm"} color="#808080">
+              Trip Budget
+            </Heading>
+          </Box>
+          <Box mt={"40px"} mb={"40px"}>
+            <Menu iconName={<FaHome />} title={"Dashboard"} />
+            <Menu iconName={<CgNotes />} title={"Transaction"} />
+            <Menu iconName={<BsWallet2 />} title={"Wallet"} />
+            <Menu iconName={<IoSettings />} title={"Settings"} />
+          </Box>
+          <Box mt={"40px"} mb={"40px"}>
+            <Menu iconName={<FaUserAlt />} title={"Account"} />
+            <Menu iconName={<IoIosLogOut />} title={"Log Out"} />
+          </Box>
+          <Box mt={"40px"} mb={"40px"}>
+            <Menu iconName={<TfiHelpAlt />} title={"Help & Information"} />
+          </Box>
         </Box>
-        <Box p={3} textAlign={"start"}>
-          <Heading color={"orange"}>{budget}</Heading>
-          <Heading size={"sm"} color="#808080">
-            Trip Budget
-          </Heading>
-        </Box>
-        <Box mt={"40px"} mb={"40px"}>
-          <Menu iconName={<FaHome />} title={"Dashboard"} />
-          <Menu iconName={<CgNotes />} title={"Transaction"} />
-          <Menu iconName={<BsWallet2 />} title={"Wallet"} />
-          <Menu iconName={<IoSettings />} title={"Settings"} />
-        </Box>
-        <Box mt={"40px"} mb={"40px"}>
-          <Menu iconName={<FaUserAlt />} title={"Account"} />
-          <Menu iconName={<IoIosLogOut />} title={"Log Out"} />
-        </Box>
-        <Box mt={"40px"} mb={"40px"}>
-          <Menu iconName={<TfiHelpAlt />} title={"Help & Information"} />
-        </Box>
-      </Box>
-    </VStack>
+      </VStack>
+    </>
   );
 }
 

@@ -5,6 +5,9 @@ import {
   HStack,
   Heading,
   Input,
+  Radio,
+  RadioGroup,
+  Stack,
   VStack,
 } from "@chakra-ui/react";
 import { useState } from "react";
@@ -13,10 +16,31 @@ import { GiReceiveMoney, GiPayMoney } from "react-icons/gi";
 import TransactionCard from "./TransactionCard";
 import BasicUsage from "./BasicUsage";
 import { FaShoppingCart } from "react-icons/fa";
+
 function Budget() {
-  const [amount, setAmount] = useState(100);
   const [income, setIncome] = useState(100);
   const [spending, setSpending] = useState(100);
+  const [amount, setAmount] = useState(0);
+
+  // Current Time
+  const currentDate = new Date();
+  const hours = currentDate.getHours();
+  const minutes = currentDate.getMinutes();
+  const day = currentDate.getDay();
+  const month = currentDate.getMonth() + 1;
+
+  // Transactions Card Data Adding Logic
+
+  const [title, setTitle] = useState("");
+  const [cost, setCost] = useState();
+  const [type, setType] = useState();
+
+  const [transaction, setTransaction] = useState([]);
+
+  let time = ` ${hours}:${minutes} ${hours > 12 ? "PM" : "AM"}`;
+  let dayStatus = `${
+    day === day ? "Today" : day === day - 1 ? "Yesterday" : "few day ago"
+  }`;
   return (
     <VStack justifyContent={"center"}>
       <HStack w={"100%"}>
@@ -73,28 +97,72 @@ function Budget() {
               <BasicUsage
                 mainBody={
                   <>
-                    <Input autoFocus mb={3} placeholder="Money Spend for..." />
+                    <form>
+                      <Input
+                        autoFocus
+                        mb={3}
+                        placeholder="Title..."
+                        value={title}
+                        onChange={(e) => {
+                          setTitle(e.target.value);
+                        }}
+                      />
 
-                    <Input type="number" placeholder="Amount" />
+                      <Input
+                        type="number"
+                        placeholder="Amount"
+                        value={cost}
+                        onChange={(e) => {
+                          setCost(e.target.value);
+                        }}
+                      />
+
+                      <RadioGroup mt={3}>
+                        <HStack
+                          justifyContent={"space-around"}
+                          value={type}
+                          onChange={(e) => {
+                            setType(e.target.value);
+                          }}
+                        >
+                          <Radio value="1">Income</Radio>
+                          <Radio value="2">Spending</Radio>
+                        </HStack>
+                      </RadioGroup>
+                    </form>
                   </>
                 }
                 btnName={"Add Transaction"}
+                handalClick={() => {
+                  // Type
+                  type === "1"
+                    ? setAmount(Number(amount) + Number(cost))
+                    : setAmount(amount - cost);
+
+                  // add this TO transaction card
+                  setTransaction([
+                    ...transaction,
+                    { title, cost, dayStatus, time, type },
+                  ]);
+                }}
               />
             }
             cardThings={
               <>
-                <AllTransaction titleofSpending={"Shopping"} prices={"$30"} />
-                <AllTransaction titleofSpending={"Shopping"} prices={"$30"} />
-                <AllTransaction titleofSpending={"Shopping"} prices={"$30"} />
-                <AllTransaction titleofSpending={"Shopping"} prices={"$30"} />
-                <AllTransaction titleofSpending={"Shopping"} prices={"$30"} />
-                <AllTransaction titleofSpending={"Shopping"} prices={"$30"} />
-                <AllTransaction titleofSpending={"Shopping"} prices={"$30"} />
-                <AllTransaction titleofSpending={"Shopping"} prices={"$30"} />
-                <AllTransaction titleofSpending={"Shopping"} prices={"$30"} />
-                <AllTransaction titleofSpending={"Shopping"} prices={"$30"} />
-                <AllTransaction titleofSpending={"Shopping"} prices={"$30"} />
-                <AllTransaction titleofSpending={"Shopping"} prices={"$30"} />
+                {transaction.map((item) => {
+                  return (
+                    <>
+                      <AllTransaction
+                        titleofSpending={item.title}
+                        prices={item.cost}
+                        dayStatus={item.dayStatus}
+                        time={item.time}
+                        ProOrLoss={item.type === "1" ? "+" : "-"}
+                        color = {item.type === "1" ? "#00b386" : "#383838"}
+                      />
+                    </>
+                  );
+                })}
               </>
             }
           />
@@ -104,7 +172,16 @@ function Budget() {
   );
 }
 
-function AllTransaction({ titleofSpending, prices }) {
+// item adding in Transaction card
+
+function AllTransaction({
+  titleofSpending,
+  prices,
+  dayStatus,
+  time,
+  ProOrLoss,
+  color
+}) {
   return (
     <>
       <Box w={"100%"} color={"white"}>
@@ -121,11 +198,15 @@ function AllTransaction({ titleofSpending, prices }) {
           <Box>
             <Heading size={"md"}>{titleofSpending}</Heading>
             <HStack>
-              <p>Yesterday, 2:00 PM</p>
+              <p>
+                {dayStatus},{time}
+              </p>
             </HStack>
           </Box>
-          <Box>
-            <Heading size={"md"}>{prices}</Heading>
+          <Box w={"100px"}>
+            <Heading size={"md"} color={color}>
+              {ProOrLoss} {prices}
+            </Heading>
           </Box>
         </HStack>
       </Box>

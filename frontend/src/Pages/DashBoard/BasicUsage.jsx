@@ -31,7 +31,7 @@ function BasicUsage({ title, mainBody, handalClick, btnName }) {
               <Button colorScheme="blue" mr={3} onClick={onClose}>
                 Close
               </Button>
-              <Button variant="ghost" onClick={handalClick}>
+              <Button type="submit" variant="ghost" onClick={() => { handalClick(); onClose(); }}>
                 {btnName}
               </Button>
             </ModalFooter>
