@@ -11,7 +11,7 @@ import { useState } from "react";
 import { BsCreditCard2Front } from "react-icons/bs";
 import { GiReceiveMoney, GiPayMoney } from "react-icons/gi";
 import TransactionCard from "./TransactionCard";
-import AddFriendsCard from "./AddFriendsCard";
+import BasicUsage from "./BasicUsage";
 function Budget() {
   const [amount, setAmount] = useState(100);
   const [income, setIncome] = useState(100);
@@ -48,11 +48,39 @@ function Budget() {
             />
           </HStack>
           <Box>
-            <AddFriendsCard />
+            <TransactionCard
+              cardName={"Add Friends"}
+              cardHight={"320px"}
+              manuBtn={
+                <BasicUsage
+                  mainBody={
+                    <>
+                      <Input type="namec" placeholder="Name" />
+                    </>
+                  }
+                  btnName={"Add Friends"}
+                />
+              }
+            />
           </Box>
         </Box>
         <Box w={"100%"}>
-          <TransactionCard cardName={"Transaction"} />
+          <TransactionCard
+            cardName={"Transaction"}
+            cardHight={"90vh"}
+            manuBtn={
+              <BasicUsage
+                mainBody={
+                  <>
+                    <Input autoFocus mb={3} placeholder="Money Spend for..." />
+
+                    <Input type="number" placeholder="Amount" />
+                  </>
+                }
+                btnName={"Add Transaction"}
+              />
+            }
+          />
         </Box>
       </HStack>
     </VStack>
