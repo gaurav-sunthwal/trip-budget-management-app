@@ -42,7 +42,7 @@ function Sidebar({ userName, budget }) {
 function Menu({ iconName, title }) {
   return (
     <>
-      <Box mt={3} p={2} className="Manu" color={"white"}>
+      <Box mt={3} p={2} className="Manu" color={"white"} cursor={"pointer"}>
         <HStack>
           <Heading fontSize={"20px"} color="gray">
             {iconName}

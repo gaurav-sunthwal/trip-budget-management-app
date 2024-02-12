@@ -8,8 +8,8 @@ function DashBoard() {
       <Box w={"25%"}>
         <Sidebar userName={"Gaurav Sunthwal"} budget={"$5000"} />
       </Box>
-      <Box>
-        <Budget budget={"$600.000"} />
+      <Box w={"75%"}>
+        <Budget />
       </Box>
     </HStack>
   );
