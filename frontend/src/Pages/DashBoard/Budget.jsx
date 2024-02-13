@@ -243,8 +243,10 @@ function IncomeSpendingCard({
         {title}
       </Heading>
       <HStack color={color} justifyContent={"space-between"}>
-        <p>{ops}</p>
-        <Heading size={"md"}>{values}</Heading>
+        {/* <p>{ops}</p> */}
+        <Heading size={"md"}>
+          {ops} {values}
+        </Heading>
         <Button
           className="CardBtn"
           color={color}
