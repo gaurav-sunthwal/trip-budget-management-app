@@ -18,8 +18,8 @@ import BasicUsage from "./BasicUsage";
 import { FaShoppingCart } from "react-icons/fa";
 
 function Budget() {
-  const [income, setIncome] = useState(100);
-  const [spending, setSpending] = useState(100);
+  const [income, setIncome] = useState(0);
+  const [spending, setSpending] = useState(0);
   const [amount, setAmount] = useState(0);
 
   // Current Time
@@ -37,7 +37,9 @@ function Budget() {
 
   const [transaction, setTransaction] = useState([]);
 
-  let time = ` ${hours}:${minutes} ${hours > 12 ? "PM" : "AM"}`;
+  let time = ` ${hours}:${minutes < 10 ? "0" + minutes : minutes} ${
+    hours > 12 ? "PM" : "AM"
+  }`;
   let dayStatus = `${
     day === day ? "Today" : day === day - 1 ? "Yesterday" : "few day ago"
   }`;
@@ -139,6 +141,10 @@ function Budget() {
                     ? setAmount(Number(amount) + Number(cost))
                     : setAmount(amount - cost);
 
+                  type === "1"
+                    ? setIncome(() => Number(income) + Number(cost))
+                    : setSpending(() => Number(cost) + Number(spending));
+
                   // add this TO transaction card
                   setTransaction([
                     ...transaction,
@@ -158,7 +164,7 @@ function Budget() {
                         dayStatus={item.dayStatus}
                         time={item.time}
                         ProOrLoss={item.type === "1" ? "+" : "-"}
-                        color = {item.type === "1" ? "#00b386" : "#383838"}
+                        color={item.type === "1" ? "#00b386" : "#b20000"}
                       />
                     </>
                   );
@@ -180,7 +186,7 @@ function AllTransaction({
   dayStatus,
   time,
   ProOrLoss,
-  color
+  color,
 }) {
   return (
     <>
@@ -236,24 +242,14 @@ function IncomeSpendingCard({
       <Heading mb={2} size={"xs"} color={color}>
         {title}
       </Heading>
-      <HStack color={color}>
+      <HStack color={color} justifyContent={"space-between"}>
         <p>{ops}</p>
-        <Input
-          type="number"
-          border={"none"}
-          placeholder="$20"
-          onFocus={"none"}
-          value={values}
-          onChange={(e) => {
-            setValue(e.target.value);
-          }}
-        />
+        <Heading size={"md"}>{values}</Heading>
         <Button
           className="CardBtn"
           color={color}
           fontSize={"30px"}
           bg={"transparent"}
-          onClick={onClick}
         >
           {btnIcon}
         </Button>
