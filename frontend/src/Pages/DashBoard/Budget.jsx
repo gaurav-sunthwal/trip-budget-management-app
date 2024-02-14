@@ -44,7 +44,7 @@ function Budget() {
     day === day ? "Today" : day === day - 1 ? "Yesterday" : "few day ago"
   }`;
   return (
-    <VStack justifyContent={"center"}>
+    <VStack>
       <HStack w={"100%"}>
         <Box p={2}>
           <Box m={3}>
@@ -164,7 +164,7 @@ function Budget() {
                         dayStatus={item.dayStatus}
                         time={item.time}
                         ProOrLoss={item.type === "1" ? "+" : "-"}
-                        color={item.type === "1" ? "#00b386" : "#b20000"}
+                        color={item.type === "1" ? "#00b386" : "red"}
                       />
                     </>
                   );
